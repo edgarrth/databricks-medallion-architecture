@@ -11,6 +11,10 @@ jobs:
   validate-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,27 +22,27 @@ jobs:
       - name: Validate notebook files
         run: |
           python - <<'PY'
-          import json, pathlib
+          import json
+          import pathlib
+
           notebooks = list(pathlib.Path(".").rglob("*.ipynb"))
           assert notebooks, "No notebooks found"
+
           for nb in notebooks:
               json.loads(nb.read_text(encoding="utf-8"))
               print(f"OK: {nb}")
           PY
 
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@main
+
       - name: Validate Databricks bundle
-        run: |
-          echo "Simulating: databricks bundle validate -t dev"
-          echo "Bundle validation completed successfully."
+        run: databricks bundle validate -t dev
 
       - name: Deploy Databricks bundle
         if: github.ref == 'refs/heads/main'
-        run: |
-          echo "Simulating: databricks bundle deploy -t dev"
-          echo "Bundle deployed successfully."
+        run: databricks bundle deploy -t dev
 
       - name: Run Databricks job
         if: github.ref == 'refs/heads/main'
-        run: |
-          echo "Simulating: databricks bundle run fintech_medallion_job -t dev"
-          echo "Job fintech_medallion_job finished successfully."
+        run: databricks bundle run fintech_medallion_job -t dev
