@@ -1,0 +1,52 @@
+bundle:
+  name: fintech-medallion-databricks
+
+variables:
+  catalog_name:
+    default: fintech_lakehouse
+  raw_base_path:
+    default: abfss://raw@<storage-account>.dfs.core.windows.net/fintech
+
+resources:
+  jobs:
+    fintech_medallion_job:
+      name: fintech-medallion-job
+      tasks:
+        - task_key: prep_environment
+          notebook_task:
+            notebook_path: ./PrepAmb/00_preparacion_ambiente.ipynb
+            base_parameters:
+              catalog_name: ${var.catalog_name}
+              raw_base_path: ${var.raw_base_path}
+        - task_key: bronze_extract
+          depends_on:
+            - task_key: prep_environment
+          notebook_task:
+            notebook_path: ./proceso/01_bronze_extract.ipynb
+            base_parameters:
+              catalog_name: ${var.catalog_name}
+              raw_base_path: ${var.raw_base_path}
+        - task_key: silver_transform
+          depends_on:
+            - task_key: bronze_extract
+          notebook_task:
+            notebook_path: ./proceso/02_silver_transform.ipynb
+            base_parameters:
+              catalog_name: ${var.catalog_name}
+        - task_key: gold_load
+          depends_on:
+            - task_key: silver_transform
+          notebook_task:
+            notebook_path: ./proceso/03_gold_load.ipynb
+            base_parameters:
+              catalog_name: ${var.catalog_name}
+
+targets:
+  dev:
+    mode: development
+    workspace:
+      host: ${workspace.host}
+  prod:
+    mode: production
+    workspace:
+      host: ${workspace.host}

@@ -1,0 +1,38 @@
+[
+  {
+    "run": 1,
+    "status": "OK",
+    "notebooks_validated": 6,
+    "customers": 6000,
+    "transactions_enriched": 25000,
+    "fraud_alerts": 7000,
+    "gold_daily_rows": 365,
+    "gold_segment_rows": 60,
+    "gold_customer_rows": 5901,
+    "fraud_rate": 0.02856
+  },
+  {
+    "run": 2,
+    "status": "OK",
+    "notebooks_validated": 6,
+    "customers": 6000,
+    "transactions_enriched": 25000,
+    "fraud_alerts": 7000,
+    "gold_daily_rows": 365,
+    "gold_segment_rows": 60,
+    "gold_customer_rows": 5901,
+    "fraud_rate": 0.02856
+  },
+  {
+    "run": 3,
+    "status": "OK",
+    "notebooks_validated": 6,
+    "customers": 6000,
+    "transactions_enriched": 25000,
+    "fraud_alerts": 7000,
+    "gold_daily_rows": 365,
+    "gold_segment_rows": 60,
+    "gold_customer_rows": 5901,
+    "fraud_rate": 0.02856
+  }
+]

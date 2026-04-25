@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS fintech_lakehouse.gold.gold_daily_fintech_kpis;
+DROP TABLE IF EXISTS fintech_lakehouse.gold.gold_fraud_by_segment_channel;
+DROP TABLE IF EXISTS fintech_lakehouse.gold.gold_customer_risk_profile;
+DROP TABLE IF EXISTS fintech_lakehouse.silver.transactions_enriched_silver;
+DROP TABLE IF EXISTS fintech_lakehouse.silver.customers_silver;
+DROP TABLE IF EXISTS fintech_lakehouse.silver.transactions_silver;
+DROP TABLE IF EXISTS fintech_lakehouse.silver.fraud_alerts_silver;
+DROP TABLE IF EXISTS fintech_lakehouse.bronze.customers_bronze;
+DROP TABLE IF EXISTS fintech_lakehouse.bronze.transactions_bronze;
+DROP TABLE IF EXISTS fintech_lakehouse.bronze.fraud_alerts_bronze;

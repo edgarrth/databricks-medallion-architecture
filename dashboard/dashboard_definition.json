@@ -1,0 +1,17 @@
+{
+  "name": "Fintech Fraud & Transaction Monitoring",
+  "visuals": [
+    {
+      "title": "Daily approval rate",
+      "source_table": "gold.gold_daily_fintech_kpis"
+    },
+    {
+      "title": "Fraud rate by segment/channel",
+      "source_table": "gold.gold_fraud_by_segment_channel"
+    },
+    {
+      "title": "Critical customer risk profile",
+      "source_table": "gold.gold_customer_risk_profile"
+    }
+  ]
+}
