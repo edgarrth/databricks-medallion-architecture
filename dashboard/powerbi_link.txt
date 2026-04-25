@@ -1,1 +1,0 @@
-Conectar Power BI a Databricks SQL Warehouse y consumir las tablas Gold.
