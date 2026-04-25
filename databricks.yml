@@ -4,8 +4,10 @@ bundle:
 variables:
   catalog_name:
     default: fintech_lakehouse
+  storage_account:
+    default: storageproject99
   raw_base_path:
-    default: abfss://raw@<storage-account>.dfs.core.windows.net/fintech
+    default: abfss://raw@${var.storage_account}.dfs.core.windows.net/fintech
 
 resources:
   jobs:
@@ -45,8 +47,8 @@ targets:
   dev:
     mode: development
     workspace:
-      host: ${workspace.host}
+      host: ${env.DATABRICKS_HOST}
   prod:
     mode: production
     workspace:
-      host: ${workspace.host}
+      host: ${env.DATABRICKS_HOST}
