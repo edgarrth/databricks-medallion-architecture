@@ -20,6 +20,7 @@ resources:
             base_parameters:
               catalog_name: ${var.catalog_name}
               raw_base_path: ${var.raw_base_path}
+
         - task_key: bronze_extract
           depends_on:
             - task_key: prep_environment
@@ -28,6 +29,7 @@ resources:
             base_parameters:
               catalog_name: ${var.catalog_name}
               raw_base_path: ${var.raw_base_path}
+
         - task_key: silver_transform
           depends_on:
             - task_key: bronze_extract
@@ -35,6 +37,7 @@ resources:
             notebook_path: ./proceso/02_silver_transform.ipynb
             base_parameters:
               catalog_name: ${var.catalog_name}
+
         - task_key: gold_load
           depends_on:
             - task_key: silver_transform
@@ -46,9 +49,6 @@ resources:
 targets:
   dev:
     mode: development
-    workspace:
-      host: ${env.DATABRICKS_HOST}
+
   prod:
     mode: production
-    workspace:
-      host: ${env.DATABRICKS_HOST}
